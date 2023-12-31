@@ -42,8 +42,8 @@ import { useOrder } from "@/composables/order";
 import { createListManager } from "@/composables/listManager";
 import PageTitle from "@/components/PageTitle.vue";
 import { ColumnSelector, FilterPopover } from "@/components";
-import TicketsAgentList from "./TicketsAgentList.vue";
-import PresetFilters from "./PresetFilters.vue";
+import TicketsAgentList from "./components/TicketsAgentList.vue";
+import PresetFilters from "./components/PresetFilters.vue";
 
 const { userId } = useAuthStore();
 const { getArgs } = useFilter("HD Ticket");

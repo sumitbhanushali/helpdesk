@@ -1,7 +1,7 @@
 <template>
   <NestedPopover>
     <template #target>
-      <Button label="Filters" theme="gray" variant="outline">
+      <Button label="Filter" theme="gray" variant="outline">
         <template #prefix>
           <LucideListFilter class="h-4 w-4" />
         </template>
@@ -13,50 +13,51 @@
     <template #body="{ close }">
       <div class="my-2 rounded bg-white shadow">
         <div class="min-w-[400px] p-2">
-          <div
-            v-for="(f, i) in storage"
-            v-if="storage.size"
-            id="filter-list"
-            :key="i"
-            class="mb-3 flex items-center justify-between gap-2"
-          >
-            <div class="flex items-center gap-2">
-              <div class="w-13 pl-2 text-end text-base text-gray-600">
-                {{ i == 0 ? "Where" : "And" }}
+          <div v-if="storage.size">
+            <div
+              v-for="(f, i) in storage"
+              id="filter-list"
+              :key="i"
+              class="mb-3 flex items-center justify-between gap-2"
+            >
+              <div class="flex items-center gap-2">
+                <div class="w-13 pl-2 text-end text-base text-gray-600">
+                  {{ i == 0 ? "Where" : "And" }}
+                </div>
+                <div id="fieldname" class="!min-w-[140px]">
+                  <Autocomplete
+                    :value="f.field.fieldname"
+                    :options="fields.data"
+                    placeholder="Filter by..."
+                    @change="(e) => updateFilter(e, i)"
+                  />
+                </div>
+                <div id="operator">
+                  <FormControl
+                    v-model="f.operator"
+                    type="select"
+                    :options="getOperators(f.field.fieldtype)"
+                    placeholder="Operator"
+                  />
+                </div>
+                <div id="value" class="!min-w-[140px]">
+                  <SearchComplete
+                    v-if="typeLink.includes(f.field.fieldtype)"
+                    :doctype="f.field.options"
+                    :value="f.value"
+                    placeholder="Value"
+                    @change="(v) => (f.value = v.value)"
+                  />
+                  <component
+                    :is="getValSelect(f.field.fieldtype, f.field.options)"
+                    v-else
+                    v-model="f.value"
+                    placeholder="Value"
+                  />
+                </div>
               </div>
-              <div id="fieldname" class="!min-w-[140px]">
-                <Autocomplete
-                  :value="f.field.fieldname"
-                  :options="fields.data"
-                  placeholder="Filter by..."
-                  @change="(e) => updateFilter(e, i)"
-                />
-              </div>
-              <div id="operator">
-                <FormControl
-                  v-model="f.operator"
-                  type="select"
-                  :options="getOperators(f.field.fieldtype)"
-                  placeholder="Operator"
-                />
-              </div>
-              <div id="value" class="!min-w-[140px]">
-                <SearchComplete
-                  v-if="typeLink.includes(f.field.fieldtype)"
-                  :doctype="f.field.options"
-                  :value="f.value"
-                  placeholder="Value"
-                  @change="(v) => (f.value = v.value)"
-                />
-                <component
-                  :is="getValSelect(f.field.fieldtype, f.field.options)"
-                  v-else
-                  v-model="f.value"
-                  placeholder="Value"
-                />
-              </div>
+              <Button variant="ghost" icon="x" @click="removeFilter(i)" />
             </div>
-            <Button variant="ghost" icon="x" @click="removeFilter(i)" />
           </div>
           <div
             v-else
