@@ -132,26 +132,12 @@ class HDTicket(Document):
 	@staticmethod
 	@lru_cache
 	def sort_options():
-		def by_priority(query: Query, direction: Order):
-			QBTicket = frappe.qb.DocType("HD Ticket")
-			QBPriority = frappe.qb.DocType("HD Ticket Priority")
-
-			query = (
-				query.left_join(QBPriority)
-				.on(QBPriority.name == QBTicket.priority)
-				.orderby(QBPriority.integer_value, order=direction)
-				.orderby(QBTicket.resolution_by, order=Order.desc)
-			)
-
-			return query
-
-		return {
-			"Due date": ("resolution_by", Order.asc),
-			"Created on": ("creation", Order.asc),
-			"High to low priority": lambda q: by_priority(q, Order.asc),
-			"Low to high priority": lambda q: by_priority(q, Order.desc),
-			"Last modified on": "modified",
-		}
+		return [
+			{ "label": 'Resolution By', "value": 'resolution_by' },
+			{ "label": 'Creation', "value": 'creation' },
+			{ "label": 'Modified', "value": 'modified' },
+			{ "label": 'Priority', "value": 'tPriority' },
+		]
 
 	def publish_update(self):
 		publish_event("helpdesk:ticket-update", {"name": self.name})

@@ -16,12 +16,13 @@ def sort_options(doctype: str):
 	if not hasattr(c, SORT_OPTIONS_METHOD):
 		return []
 
-	return c.sort_options().keys()
+	return c.sort_options()
 
 
 def apply_sort(doctype: str, order_by: str, query: Query):
 	controller = get_controller(doctype)
 	fallback = query.orderby(DEFAULT_SORT_FIELD, order=DEFAULT_SORT_DIRECTION)
+	return fallback
 
 	if not hasattr(controller, SORT_OPTIONS_METHOD):
 		return fallback
@@ -37,4 +38,3 @@ def apply_sort(doctype: str, order_by: str, query: Query):
 	if isinstance(action, str):
 		return query.orderby(action, order=DEFAULT_SORT_DIRECTION)
 
-	return fallback
