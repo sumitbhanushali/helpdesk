@@ -1,12 +1,14 @@
 <template>
   <NestedPopover>
     <template #target>
-      <Button label="Filter" theme="gray" variant="outline">
-        <template #prefix>
-          <LucideListFilter class="h-4 w-4" />
-        </template>
+      <Button label="Filter">
+        <template #prefix><FilterIcon class="h-4" /></template>
         <template v-if="storage.size" #suffix>
-          <Badge :label="storage.size" theme="gray" variant="subtle" />
+          <div
+            class="text-2xs flex h-5 w-5 items-center justify-center rounded bg-gray-900 pt-[1px] font-medium text-white"
+          >
+            {{ storage.size }}
+          </div>
         </template>
       </Button>
     </template>
@@ -104,6 +106,7 @@ import { Badge, Autocomplete, FormControl } from "frappe-ui";
 import { useDebounceFn } from "@vueuse/core";
 import { useFilter } from "@/composables/filter";
 import { NestedPopover, SearchComplete } from "@/components";
+import FilterIcon from "@/components/icons/FilterIcon.vue";
 
 const props = defineProps({
   doctype: {

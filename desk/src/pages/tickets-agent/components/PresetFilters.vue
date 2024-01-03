@@ -2,13 +2,13 @@
   <Dropdown :options="options">
     <template #default="{ open }">
       <div class="flex cursor-pointer items-center gap-1">
-        <div class="text-lg font-medium text-gray-900">
-          {{ title }}
-        </div>
-        <Icon
-          :icon="open ? 'lucide:chevron-up' : 'lucide:chevron-down'"
-          class="h-4 w-4 text-gray-700"
-        />
+        <Button :label="title">
+          <template #suffix
+            ><FeatherIcon
+              :name="open ? 'chevron-up' : 'chevron-down'"
+              class="h-4 text-gray-600"
+          /></template>
+        </Button>
       </div>
     </template>
   </Dropdown>
@@ -17,7 +17,7 @@
 <script>
 import { ref } from "vue";
 import { Dropdown } from "frappe-ui";
-import { Icon } from "@iconify/vue";
+// import { Icon } from "@iconify/vue";
 import { useConfigStore } from "@/stores/config";
 import { useFilter } from "@/composables/filter";
 
@@ -25,7 +25,7 @@ export default {
   name: "PresetFilters",
   components: {
     Dropdown,
-    Icon,
+    // Icon,
   },
   setup() {
     const configStore = useConfigStore();
