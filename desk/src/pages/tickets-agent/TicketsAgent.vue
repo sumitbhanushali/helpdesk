@@ -16,7 +16,7 @@
       <div class="flex items-center gap-2">
         <Filter doctype="HD Ticket" />
         <SortBy doctype="HD Ticket" />
-        <ColumnSelector doctype="HD Ticket" :columns="columns" />
+        <ViewSettings v-model="tickets" doctype="HD Ticket" />
       </div>
     </div>
     <TicketsAgentList :resource="tickets" :columns="columns" />
@@ -33,26 +33,33 @@ import { socket } from "@/socket";
 import { useAuthStore } from "@/stores/auth";
 
 import { useFilter } from "@/composables/filter";
-import { useOrder } from "@/composables/order";
+import { useOrderBy } from "@/composables/orderby";
 import { createListManager } from "@/composables/listManager";
 
-import { ColumnSelector, Filter, PageTitle, SortBy } from "@/components";
+import {
+  ColumnSelector,
+  Filter,
+  PageTitle,
+  SortBy,
+  ViewSettings,
+} from "@/components";
 
 import TicketsAgentList from "./components/TicketsAgentList.vue";
 import PresetFilters from "./components/PresetFilters.vue";
 
 const { userId } = useAuthStore();
 const { getArgs } = useFilter("HD Ticket");
-const { get: getOrder, set: setOrder } = useOrder();
+const { get: getOrderBy, set: setOrderBy } = useOrderBy();
 const pageLength = ref(20);
 const tickets = createListManager({
   doctype: "HD Ticket",
   pageLength: pageLength.value,
   filters: getArgs(),
-  orderBy: getOrder(),
+  orderBy: getOrderBy(),
   auto: true,
-  transform: (data) => {
-    for (const d of data) {
+  transform: (response) => {
+    console.log(response, "dd");
+    for (const d of response.data) {
       d.class = {
         "font-medium": !d._seen?.includes(userId),
       };
@@ -69,9 +76,26 @@ const tickets = createListManager({
       };
       d.source = d.via_customer_portal ? "Customer portal" : "Email";
     }
-    return data;
+    return response.data;
   },
 });
+
+function getParams() {
+  const filters = getArgs() || {};
+  const order_by = getOrderBy() || "modified desc";
+
+  return {
+    doctype: "HD Ticket",
+    filters: filters,
+    order_by: order_by,
+  };
+}
+
+// const tickets = createResource({
+//   url: 'helpdesk.api.doc.get_list_data',
+//   params: getParams(),
+//   auto: true,
+// })
 
 socket.on("helpdesk:new-ticket", () => {
   if (!tickets.hasPreviousPage) tickets.reload();

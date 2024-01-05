@@ -16,3 +16,4 @@ export { default as TimelineItem } from "./TimelineItem.vue";
 export { default as UniInput } from "./UniInput.vue";
 export { default as UserAvatar } from "./UserAvatar.vue";
 export { default as SortBy } from "./SortBy.vue";
+export { default as ViewSettings } from "./ViewSettings.vue";

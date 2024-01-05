@@ -159,7 +159,6 @@ function initialOrderBy() {
 }
 
 const options = computed(() => {
-  console.log("sortoptions", sortOptions);
   if (!sortOptions.data) return [];
   const selectedOptions = sortValues.value.map((sort) => sort.fieldname);
   return sortOptions.data.filter((option) => {

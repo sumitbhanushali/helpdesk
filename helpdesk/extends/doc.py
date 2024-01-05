@@ -22,7 +22,7 @@ def sort_options(doctype: str):
 def apply_sort(doctype: str, order_by: str, query: Query):
 	controller = get_controller(doctype)
 	fallback = query.orderby(DEFAULT_SORT_FIELD, order=DEFAULT_SORT_DIRECTION)
-	return fallback
+	return fallback #TODO
 
 	if not hasattr(controller, SORT_OPTIONS_METHOD):
 		return fallback

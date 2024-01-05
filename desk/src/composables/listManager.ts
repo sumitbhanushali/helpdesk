@@ -1,7 +1,7 @@
 import { ref, watch } from "vue";
 import { createListResource, createResource } from "frappe-ui";
 
-const GET_LIST_METHOD = "helpdesk.extends.client.get_list";
+const GET_LIST_METHOD = "helpdesk.api.doc.get_list_data";
 const GET_LIST_META_METHOD = "helpdesk.extends.client.get_list_meta";
 
 type ListOptions = {
