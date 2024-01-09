@@ -16,64 +16,27 @@
               {{ data.customer }}
             </span>
           </div>
-          <div
-            v-if="data.first_responded_on || data.response_by"
-            class="space-y-1.5"
-          >
+          <div v-if="view_data.show_first_response" class="space-y-1.5">
             <div class="text-sm text-gray-700">First response</div>
             <div class="mr-2 inline-block font-medium text-gray-900">
-              {{ dayjs(data.first_responded_on || data.response_by).short() }}
+              {{ dayjs(view_data.first_response).short() }}
             </div>
             <span v-if="data.response_by">
               <Badge
-                v-if="!data.first_responded_on"
-                label="Due"
-                theme="orange"
+                :label="view_data.first_response_badge.label"
+                :theme="view_data.first_response_badge.theme"
                 variant="outline"
               />
-              <Badge
-                v-else-if="
-                  dayjs(data.first_responded_on).isBefore(
-                    dayjs(data.response_by)
-                  )
-                "
-                label="Fulfilled"
-                theme="green"
-                variant="outline"
-              />
-              <Badge v-else label="Failed" theme="red" variant="outline" />
             </span>
           </div>
-          <div
-            v-if="data.resolution_date || data.resolution_by"
-            class="space-y-1.5"
-          >
+          <div v-if="view_data.show_resolution" class="space-y-1.5">
             <span class="block text-sm text-gray-700">Resolution</span>
             <span class="mr-2 font-medium text-gray-900">
-              {{ dayjs(data.resolution_date || data.resolution_by).short() }}
+              {{ dayjs(view_data.resolution).short() }}
             </span>
             <Badge
-              v-if="
-                dayjs(data.resolution_date || undefined).isAfter(
-                  data.resolution_by
-                )
-              "
-              label="Failed"
-              theme="red"
-              variant="outline"
-            />
-            <Badge
-              v-else-if="!data.resolution_date"
-              label="Due"
-              theme="orange"
-              variant="outline"
-            />
-            <Badge
-              v-else-if="
-                dayjs(data.resolution_date).isBefore(data.resolution_by)
-              "
-              label="Fulfilled"
-              theme="green"
+              :label="view_data.resolution_badge.label"
+              :theme="view_data.resolution_badge.theme"
               variant="outline"
             />
           </div>
@@ -149,6 +112,61 @@ import { ITicket } from "./symbols";
 
 const ticket = inject(ITicket);
 const data = computed(() => ticket.data);
+
+function get_response_badge_value() {
+  if (!data.value.first_responded_on) {
+    return {
+      label: "Due",
+      theme: "orange",
+    };
+  } else if (
+    dayjs(data.value.first_responded_on).isBefore(dayjs(data.value.response_by))
+  ) {
+    return {
+      label: "Fulfilled",
+      theme: "green",
+    };
+  } else {
+    return {
+      label: "Failed",
+      theme: "red",
+    };
+  }
+}
+
+function get_resolution_badge_value() {
+  if (
+    dayjs(data.value.resolution_date || undefined).isAfter(
+      data.value.resolution_by
+    )
+  ) {
+    return {
+      label: "Failed",
+      theme: "red",
+    };
+  } else if (!data.value.resolution_date) {
+    return {
+      label: "Due",
+      theme: "orange",
+    };
+  } else if (
+    dayjs(data.value.resolution_date).isBefore(data.value.resolution_by)
+  ) {
+    return {
+      label: "Fulfilled",
+      theme: "green",
+    };
+  }
+}
+
+const view_data = {
+  show_first_response: data.value.first_responded_on || data.value.response_by,
+  first_response: data.value.first_responded_on || data.value.response_by,
+  first_response_badge: get_response_badge_value(),
+  show_resolution: data.value.resolution_date || data.value.resolution_by,
+  resolution: data.value.resolution_date || data.value.resolution_by,
+  resolution_badge: get_resolution_badge_value(),
+};
 
 const options = computed(() => [
   {
