@@ -1,0 +1,12 @@
+export { default as TicketsAgentList } from "./TicketsAgentList.vue";
+export { default as PresetFilters } from "./PresetFilters.vue";
+export { default as TicketAgentActions } from "./TicketAgentActions.vue";
+export { default as TicketAgentSidebar } from "./TicketAgentSidebar.vue";
+export { default as TicketBreadcrumbs } from "./TicketBreadcrumbs.vue";
+export { default as TicketCannedResponses } from "./TicketCannedResponses.vue";
+export { default as TicketConversation } from "./TicketConversation.vue";
+export { default as TicketPinnedComments } from "./TicketPinnedComments.vue";
+export { default as TicketTextEditor } from "./TicketTextEditor.vue";
+export { default as TicketNewArticles } from "./TicketNewArticles.vue";
+export { default as TicketCustomerTemplateFields } from "./TicketCustomerTemplateFields.vue";
+export { default as TicketFeedback } from "./TicketFeedback.vue";

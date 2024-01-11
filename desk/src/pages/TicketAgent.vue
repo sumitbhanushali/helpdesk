@@ -190,14 +190,18 @@ import { emitter } from "@/emitter";
 import { socket } from "@/socket";
 import { useAgentStore } from "@/stores/agent";
 import { useError } from "@/composables/error";
-import TicketAgentActions from "./TicketAgentActions.vue";
-import TicketAgentSidebar from "./TicketAgentSidebar.vue";
-import TicketBreadcrumbs from "./TicketBreadcrumbs.vue";
-import TicketCannedResponses from "./TicketCannedResponses.vue";
-import TicketConversation from "./TicketConversation.vue";
-import TicketPinnedComments from "./TicketPinnedComments.vue";
-import TicketTextEditor from "./TicketTextEditor.vue";
-import { ITicket } from "./symbols";
+
+import {
+  TicketAgentActions,
+  TicketAgentSidebar,
+  TicketBreadcrumbs,
+  TicketCannedResponses,
+  TicketConversation,
+  TicketPinnedComments,
+  TicketTextEditor,
+} from "@/components/ticket";
+
+import { ITicket } from "@/components/ticket/symbols"; //TODO
 
 interface P {
   ticketId: string;

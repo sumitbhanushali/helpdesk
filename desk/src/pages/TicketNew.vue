@@ -54,9 +54,11 @@ import sanitizeHtml from "sanitize-html";
 import { isEmpty } from "lodash";
 import { useError } from "@/composables/error";
 import { UniInput } from "@/components";
-import TicketBreadcrumbs from "./TicketBreadcrumbs.vue";
-import TicketNewArticles from "./TicketNewArticles.vue";
-import TicketTextEditor from "./TicketTextEditor.vue";
+import {
+  TicketTextEditor,
+  TicketNewArticles,
+  TicketBreadcrumbs,
+} from "@/components/ticket";
 
 interface P {
   templateId?: string;

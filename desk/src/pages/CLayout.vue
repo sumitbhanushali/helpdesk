@@ -1,24 +1,29 @@
 <template>
-  <div
-    class="flex items-center justify-between rounded-b bg-white px-5 py-2.5 text-base"
-  >
-    <Dropdown :options="options">
-      <template #default="{ open }">
-        <div class="flex cursor-pointer items-center gap-1">
-          <UserAvatar
-            :name="authStore.userName"
-            :image="authStore.userImage"
-            expand
-            strong
-          />
-          <div class="text-gray-700">
-            <Icon v-if="open" icon="lucide:chevron-up" />
-            <Icon v-else icon="lucide:chevron-down" />
-          </div>
-        </div>
-      </template>
-    </Dropdown>
-    <img :src="Logo" class="h-5" />
+  <div class="bg-gray-200">
+    <div class="container mx-auto flex h-screen w-screen flex-col">
+      <div
+        class="mb-2.5 flex items-center justify-between rounded-b bg-white px-5 py-2.5 text-base"
+      >
+        <Dropdown :options="options">
+          <template #default="{ open }">
+            <div class="flex cursor-pointer items-center gap-1">
+              <UserAvatar
+                :name="authStore.userName"
+                :image="authStore.userImage"
+                expand
+                strong
+              />
+              <div class="text-gray-700">
+                <Icon v-if="open" icon="lucide:chevron-up" />
+                <Icon v-else icon="lucide:chevron-down" />
+              </div>
+            </div>
+          </template>
+        </Dropdown>
+        <img :src="Logo" class="h-5" />
+      </div>
+      <RouterView class="grow overflow-hidden rounded-t bg-white" />
+    </div>
   </div>
 </template>
 

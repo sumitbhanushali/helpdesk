@@ -59,12 +59,16 @@ import { computed, provide, ref } from "vue";
 import { createResource, Button } from "frappe-ui";
 import { Icon } from "@iconify/vue";
 import { useError } from "@/composables/error";
-import TicketBreadcrumbs from "./TicketBreadcrumbs.vue";
-import TicketConversation from "./TicketConversation.vue";
-import TicketCustomerTemplateFields from "./TicketCustomerTemplateFields.vue";
-import TicketFeedback from "./TicketFeedback.vue";
-import TicketTextEditor from "./TicketTextEditor.vue";
-import { ITicket } from "./symbols";
+
+import {
+  TicketBreadcrumbs,
+  TicketConversation,
+  TicketCustomerTemplateFields,
+  TicketFeedback,
+  TicketTextEditor,
+} from "@/components/ticket";
+
+import { ITicket } from "@/symbols";
 
 interface P {
   ticketId: string;

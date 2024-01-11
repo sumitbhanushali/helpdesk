@@ -1,0 +1,15 @@
+export { default as KnowledgeBase } from "./KnowledgeBase.vue";
+export { default as KnowledgeBaseArticleActionsEdit } from "./KnowledgeBaseArticleActionsEdit.vue";
+export { default as KnowledgeBaseArticleActionsNew } from "./KnowledgeBaseArticleActionsNew.vue";
+export { default as KnowledgeBaseArticleActionsView } from "./KnowledgeBaseArticleActionsView.vue";
+export { default as KnowledgeBaseArticleTopEdit } from "./KnowledgeBaseArticleTopEdit.vue";
+export { default as KnowledgeBaseArticleTopNew } from "./KnowledgeBaseArticleTopNew.vue";
+export { default as KnowledgeBaseArticleTopPublic } from "./KnowledgeBaseArticleTopPublic.vue";
+export { default as KnowledgeBaseArticleTopView } from "./KnowledgeBaseArticleTopView.vue";
+export { default as KnowledgeBaseCategory } from "./KnowledgeBaseCategory.vue";
+export { default as KnowledgeBaseCategoryHeader } from "./KnowledgeBaseCategoryHeader.vue";
+export { default as KnowledgeBaseCategoryNew } from "./KnowledgeBaseCategoryNew.vue";
+export { default as KnowledgeBaseIconSelector } from "./KnowledgeBaseIconSelector.vue";
+export { default as KnowledgeBasePublicSearch } from "./KnowledgeBasePublicSearch.vue";
+export { default as KnowledgeBaseSidebar } from "./KnowledgeBaseSidebar.vue";
+export { default as KnowledgeBaseSubcategory } from "./KnowledgeBaseSubcategory.vue";

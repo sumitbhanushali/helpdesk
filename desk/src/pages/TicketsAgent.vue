@@ -3,7 +3,7 @@
     <PageTitle title="Tickets">
       <template #right>
         <RouterLink :to="{ name: 'TicketAgentNew' }">
-          <Button label="New ticket" theme="gray" variant="solid">
+          <Button label="Create" theme="gray" variant="solid">
             <template #prefix>
               <LucidePlus class="h-4 w-4" />
             </template>
@@ -16,7 +16,7 @@
       <div class="flex items-center gap-2">
         <Filter doctype="HD Ticket" />
         <SortBy doctype="HD Ticket" />
-        <ViewSettings v-model="tickets" doctype="HD Ticket" />
+        <ViewControls v-model="tickets" doctype="HD Ticket" />
       </div>
     </div>
     <TicketsAgentList :resource="tickets" :columns="columns" />
@@ -41,11 +41,10 @@ import {
   Filter,
   PageTitle,
   SortBy,
-  ViewSettings,
+  ViewControls,
 } from "@/components";
 
-import TicketsAgentList from "./components/TicketsAgentList.vue";
-import PresetFilters from "./components/PresetFilters.vue";
+import { TicketsAgentList, PresetFilters } from "@/components/ticket";
 
 const { userId } = useAuthStore();
 const { getArgs } = useFilter("HD Ticket");
@@ -58,7 +57,6 @@ const tickets = createListManager({
   orderBy: getOrderBy(),
   auto: true,
   transform: (response) => {
-    console.log(response, "dd");
     for (const d of response.data) {
       d.class = {
         "font-medium": !d._seen?.includes(userId),
