@@ -92,7 +92,7 @@ import { AGENT_PORTAL_KNOWLEDGE_BASE_ARTICLE } from "@/router";
 import { createListManager } from "@/composables/listManager";
 import { useError } from "@/composables/error";
 import { ListView } from "@/components";
-import KnowledgeBaseCategoryHeader from "./KnowledgeBaseCategoryHeader.vue";
+import KnowledgeBaseCategoryHeader from "@/components/knowledge-base/KnowledgeBaseCategoryHeader.vue";
 import EmptyMessage from "@/components/EmptyMessage.vue";
 import IconEdit from "~icons/lucide/edit-3";
 import IconFile from "~icons/lucide/file-text";

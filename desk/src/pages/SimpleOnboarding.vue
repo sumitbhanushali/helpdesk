@@ -26,13 +26,16 @@ import { useRouter } from "vue-router";
 import { createResource } from "frappe-ui";
 import { useAuthStore } from "@/stores/auth";
 import { useConfigStore } from "@/stores/config";
-import OnboardingIntro from "./OnboardingIntro.vue";
-import SetupEmail from "./email/SetupEmail.vue";
-import SetupFavicon from "./SetupFavicon.vue";
-import SetupLogo from "./SetupLogo.vue";
-import SetupName from "./SetupName.vue";
-import SetupSkipEmail from "./SetupSkipEmail.vue";
-import SuccessMessage from "./SuccessMessage.vue";
+
+import {
+  OnboardingIntro,
+  SetupEmail,
+  SetupFavicon,
+  SetupLogo,
+  SetupName,
+  SetupSkipEmail,
+  SuccessMessage,
+} from "@/components/onboarding";
 
 const router = useRouter();
 const authStore = useAuthStore();
@@ -113,7 +116,7 @@ function finish() {
 }
 
 function redirect() {
-  router.replace({ path: '/' });
+  router.replace({ path: "/" });
 }
 
 onBeforeMount(() => {

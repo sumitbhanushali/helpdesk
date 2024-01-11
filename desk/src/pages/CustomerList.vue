@@ -46,7 +46,7 @@ import { createListManager } from "@/composables/listManager";
 import NewCustomerDialog from "@/components/desk/global/NewCustomerDialog.vue";
 import PageTitle from "@/components/PageTitle.vue";
 import { ListView } from "@/components";
-import CustomerDialog from "./CustomerDialog.vue";
+import CustomerDialog from "@/components/customer";
 import IconPlus from "~icons/lucide/plus";
 
 const isDialogVisible = ref(false);

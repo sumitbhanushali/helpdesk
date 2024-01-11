@@ -43,7 +43,7 @@ import { createListManager } from "@/composables/listManager";
 import NewContactDialog from "@/components/desk/global/NewContactDialog.vue";
 import PageTitle from "@/components/PageTitle.vue";
 import { ListView } from "@/components";
-import ContactDialog from "./ContactDialog.vue";
+import ContactDialog from "@/components/contact/ContactDialog.vue";
 
 const isDialogVisible = ref(false);
 const isContactDialogVisible = ref(false);

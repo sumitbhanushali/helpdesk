@@ -2,58 +2,10 @@ import { createRouter, createWebHistory } from "vue-router";
 import { useAuthStore } from "@/stores/auth";
 import { init as initTelemetry } from "@/telemetry";
 
-export const LOGIN = "AuthLogin";
-export const SIGNUP = "AuthSignup";
-export const VERIFY = "AuthVerify";
-export const AUTH_ROUTES = [LOGIN, SIGNUP, VERIFY];
-
-export const WEBSITE_ROOT = "Website Root";
-
 const routes = [
   {
     path: "",
     component: () => import("@/pages/HRoot.vue"),
-  },
-  {
-    path: "",
-    meta: {
-      auth: false,
-    },
-    children: [
-      {
-        path: "/login",
-        name: "AuthLogin",
-        component: () => import("@/pages/AuthLogin.vue"),
-      },
-      {
-        path: "/signup",
-        name: "AuthSignup",
-        component: () => import("@/pages/AuthSignup.vue"),
-      },
-      {
-        path: "/verify/:requestKey",
-        name: "AuthVerify",
-        component: () => import("@/pages/AuthVerify.vue"),
-        props: true,
-      },
-    ],
-  },
-  {
-    path: "/tickets",
-    name: "TicketsAgent",
-    component: () => import("@/pages/TicketsAgent.vue"),
-  },
-  {
-    path: "/tickets/:ticketId",
-    name: "TicketAgent",
-    props: true,
-    component: () => import("@/pages/TicketAgent.vue"),
-  },
-  {
-    path: "/tickets/new/:templateId?",
-    name: "TicketAgentNew",
-    props: true,
-    component: () => import("@/pages/TicketNew.vue"),
   },
   {
     path: "/my-tickets",
@@ -85,6 +37,181 @@ const routes = [
       },
     ],
   },
+  {
+    path: "/knowledge-base",
+    component: () => import("@/pages/KnowledgeBasePublic.vue"),
+    children: [
+      {
+        path: "",
+        name: "KBHome",
+        component: () => import("@/pages/KnowledgeBasePublicHome.vue"),
+      },
+      {
+        path: ":categoryId",
+        name: "KBCategoryPublic",
+        component: () => import("@/pages/KnowledgeBasePublicCategory.vue"),
+        props: true,
+      },
+      {
+        path: "articles/:articleId",
+        name: "KBArticlePublic",
+        component: () => import("@/pages/KnowledgeBaseArticle.vue"),
+        meta: {
+          public: true,
+        },
+        props: true,
+      },
+    ],
+  },
+  {
+    path: "",
+    meta: {
+      auth: false,
+    },
+    children: [
+      {
+        path: "/login",
+        name: "AuthLogin",
+        component: () => import("@/pages/AuthLogin.vue"),
+      },
+      {
+        path: "/signup",
+        name: "AuthSignup",
+        component: () => import("@/pages/AuthSignup.vue"),
+      },
+      {
+        path: "/verify/:requestKey",
+        name: "AuthVerify",
+        component: () => import("@/pages/AuthVerify.vue"),
+        props: true,
+      },
+    ],
+  },
+  {
+    path: "/onboarding",
+    name: "Setup",
+    component: () => import("@/pages/SimpleOnboarding.vue"),
+  },
+  {
+    path: "",
+    name: "AgentRoot",
+    component: () => import("@/pages/AgentRoot.vue"),
+    meta: {
+      auth: true,
+      agent: true,
+      admin: false,
+    },
+    children: [
+      {
+        path: "dashboard",
+        name: "DeskDashboard",
+        component: () => import("@/pages/DeskDashboard.vue"),
+      },
+      {
+        path: "/tickets",
+        name: "TicketsAgent",
+        component: () => import("@/pages/TicketsAgent.vue"),
+      },
+      {
+        path: "/tickets/:ticketId",
+        name: "TicketAgent",
+        props: true,
+        component: () => import("@/pages/TicketAgent.vue"),
+      },
+      {
+        path: "/tickets/new/:templateId?",
+        name: "TicketAgentNew",
+        props: true,
+        component: () => import("@/pages/TicketNew.vue"),
+      },
+      {
+        path: "kb",
+        name: "DeskKBHome",
+        component: () => import("@/pages/KnowledgeBase.vue"),
+        children: [
+          {
+            path: ":categoryId",
+            name: "DeskKBCategory",
+            props: true,
+            component: () => import("@/pages/KnowledgeBaseCategory.vue"),
+          },
+          {
+            path: ":categoryId/:subCategoryId",
+            name: "DeskKBSubcategory",
+            props: true,
+            component: () => import("@/pages/KnowledgeBaseSubcategory.vue"),
+          },
+        ],
+      },
+      {
+        path: "kb/articles/:articleId",
+        name: "DeskKBArticle",
+        props: true,
+        component: () => import("@/pages/KnowledgeBaseArticle.vue"),
+      },
+      {
+        path: "customers",
+        name: "CustomerList",
+        component: () => import("@/pages/CustomerList.vue"),
+      },
+      {
+        path: "/contacts",
+        name: "ContactList",
+        component: () => import("@/pages/ContactList.vue"),
+      },
+      // {
+      //   path: "agents",
+      //   name: AGENT_PORTAL_AGENT_LIST,
+      //   component: () => import("@/pages/desk/agent/AgentList.vue"),
+      // },
+      // {
+      //   path: "teams",
+      //   name: AGENT_PORTAL_TEAM_LIST,
+      //   component: () => import("@/pages/desk/team/TeamList.vue"),
+      // },
+      // {
+      //   path: "teams/:teamId",
+      //   name: AGENT_PORTAL_TEAM_SINGLE,
+      //   component: () => import("@/pages/desk/team/TeamSingle.vue"),
+      //   props: true,
+      // },
+      // {
+      //   path: "ticket-types",
+      //   name: AGENT_PORTAL_TICKET_TYPE_LIST,
+      //   component: () => import("@/pages/desk/ticket_type/TicketTypeList.vue"),
+      // },
+      // {
+      //   path: "ticket-types/:id",
+      //   name: AGENT_PORTAL_TICKET_TYPE_SINGLE,
+      //   component: () => import("@/pages/desk/ticket_type/TicketType.vue"),
+      //   props: true,
+      // },
+      // {
+      //   path: "ticket-types/new",
+      //   name: AGENT_PORTAL_TICKET_TYPE_NEW,
+      //   component: () => import("@/pages/desk/ticket_type/TicketType.vue"),
+      // },
+      // {
+      //   path: "canned-responses",
+      //   name: AGENT_PORTAL_CANNED_RESPONSE_LIST,
+      //   component: () =>
+      //     import("@/pages/desk/canned_response/CannedResponseList.vue"),
+      // },
+      // {
+      //   path: "canned-responses/:id",
+      //   name: AGENT_PORTAL_CANNED_RESPONSE_SINGLE,
+      //   component: () =>
+      //     import("@/pages/desk/canned_response/CannedResponseSingle.vue"),
+      //   props: true,
+      // },
+      // {
+      //   path: "escalation-rules",
+      //   name: AGENT_PORTAL_ESCALATION_RULE_LIST,
+      //   component: () =>
+      //     import("@/pages/desk/escalation/EscalationRuleList.vue"),
+      // },
+    ],
+  },
 ];
 
 export const router = createRouter({
@@ -93,7 +220,9 @@ export const router = createRouter({
 });
 
 router.beforeEach(async (to) => {
-  const isAuthRoute = AUTH_ROUTES.includes(to.name);
+  const isAuthRoute = ["AuthLogin", "AuthSignup", "AuthVerify"].includes(
+    to.name
+  );
   const authStore = useAuthStore();
 
   try {
@@ -101,12 +230,12 @@ router.beforeEach(async (to) => {
     await authStore.init();
 
     if ((to.meta.agent && !authStore.hasDeskAccess) || isAuthRoute) {
-      router.replace({ name: WEBSITE_ROOT });
+      router.replace({ name: "Website Root" }); //TODO
     }
   } catch {
     if (!isAuthRoute) {
       router.replace({
-        name: LOGIN,
+        name: "AuthLogin",
         query: {
           redirect: to.path.toString(),
         },
