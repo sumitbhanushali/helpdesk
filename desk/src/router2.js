@@ -159,57 +159,55 @@ const routes = [
         name: "ContactList",
         component: () => import("@/pages/ContactList.vue"),
       },
-      // {
-      //   path: "agents",
-      //   name: AGENT_PORTAL_AGENT_LIST,
-      //   component: () => import("@/pages/desk/agent/AgentList.vue"),
-      // },
-      // {
-      //   path: "teams",
-      //   name: AGENT_PORTAL_TEAM_LIST,
-      //   component: () => import("@/pages/desk/team/TeamList.vue"),
-      // },
-      // {
-      //   path: "teams/:teamId",
-      //   name: AGENT_PORTAL_TEAM_SINGLE,
-      //   component: () => import("@/pages/desk/team/TeamSingle.vue"),
-      //   props: true,
-      // },
-      // {
-      //   path: "ticket-types",
-      //   name: AGENT_PORTAL_TICKET_TYPE_LIST,
-      //   component: () => import("@/pages/desk/ticket_type/TicketTypeList.vue"),
-      // },
-      // {
-      //   path: "ticket-types/:id",
-      //   name: AGENT_PORTAL_TICKET_TYPE_SINGLE,
-      //   component: () => import("@/pages/desk/ticket_type/TicketType.vue"),
-      //   props: true,
-      // },
-      // {
-      //   path: "ticket-types/new",
-      //   name: AGENT_PORTAL_TICKET_TYPE_NEW,
-      //   component: () => import("@/pages/desk/ticket_type/TicketType.vue"),
-      // },
-      // {
-      //   path: "canned-responses",
-      //   name: AGENT_PORTAL_CANNED_RESPONSE_LIST,
-      //   component: () =>
-      //     import("@/pages/desk/canned_response/CannedResponseList.vue"),
-      // },
-      // {
-      //   path: "canned-responses/:id",
-      //   name: AGENT_PORTAL_CANNED_RESPONSE_SINGLE,
-      //   component: () =>
-      //     import("@/pages/desk/canned_response/CannedResponseSingle.vue"),
-      //   props: true,
-      // },
-      // {
-      //   path: "escalation-rules",
-      //   name: AGENT_PORTAL_ESCALATION_RULE_LIST,
-      //   component: () =>
-      //     import("@/pages/desk/escalation/EscalationRuleList.vue"),
-      // },
+      {
+        path: "agents",
+        name: "AgentList",
+        component: () => import("@/pages/AgentList.vue"),
+      },
+      {
+        path: "teams",
+        name: "Teams",
+        component: () => import("@/pages/TeamList.vue"),
+      },
+      {
+        path: "teams/:teamId",
+        name: "Team",
+        component: () => import("@/pages/TeamSingle.vue"),
+        props: true,
+      },
+      {
+        path: "ticket-types",
+        name: "TicketTypes",
+        component: () => import("@/pages/TicketTypeList.vue"),
+      },
+      {
+        path: "ticket-types/:id",
+        name: "TicketType",
+        component: () => import("@/pages/TicketType.vue"),
+        props: true,
+      },
+      {
+        path: "ticket-types/new",
+        name: "NewTicketType",
+        component: () => import("@/pages/TicketType.vue"),
+      },
+      {
+        path: "canned-responses",
+        name: "CannedResponses",
+        component: () => import("@/pages/CannedResponseList.vue"),
+      },
+      {
+        path: "canned-responses/:id",
+        name: "CannedResponse",
+        component: () => import("@/pages/CannedResponseSingle.vue"),
+        props: true,
+      },
+      {
+        path: "escalation-rules",
+        name: "EscalationRules",
+        component: () =>
+          import("@/pages/desk/escalation/EscalationRuleList.vue"),
+      },
     ],
   },
 ];

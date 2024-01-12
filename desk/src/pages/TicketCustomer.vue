@@ -68,7 +68,7 @@ import {
   TicketTextEditor,
 } from "@/components/ticket";
 
-import { ITicket } from "@/symbols";
+import { ITicket } from "@/components/ticket/symbols";
 
 interface P {
   ticketId: string;

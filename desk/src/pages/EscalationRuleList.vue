@@ -40,7 +40,7 @@ import { socket } from "@/socket";
 import { createListManager } from "@/composables/listManager";
 import { ListView } from "@/components";
 import PageTitle from "@/components/PageTitle.vue";
-import EscalationRuleDialog from "./EscalationRuleDialog.vue";
+import EscalationRuleDialog from "@/components/escalation/";
 
 const showDialog = ref(false);
 const selectedRule = ref(null);
