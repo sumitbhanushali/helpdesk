@@ -8,7 +8,7 @@
               {
                 label: 'Teams',
                 route: {
-                  name: AGENT_PORTAL_TEAM_LIST,
+                  name: 'Teams',
                 },
               },
               {
@@ -134,7 +134,6 @@ import {
   Switch,
 } from "frappe-ui";
 import { isEmpty } from "lodash";
-import { AGENT_PORTAL_TEAM_LIST, AGENT_PORTAL_TEAM_SINGLE } from "@/router";
 import { useAgentStore } from "@/stores/agent";
 import { useError } from "@/composables/error";
 import { PageTitle, BreadCrumbs } from "@/components";
@@ -165,7 +164,7 @@ const team = createDocumentResource({
   delete: {
     onSuccess() {
       router.replace({
-        name: AGENT_PORTAL_TEAM_LIST,
+        name: "Teams",
       });
     },
     onError: useError({ title: "Error deleting team" }),
@@ -234,7 +233,7 @@ function renameTeam() {
     },
     onSuccess() {
       router.replace({
-        name: AGENT_PORTAL_TEAM_SINGLE,
+        name: "Team",
         params: {
           teamId: title.value,
         },

@@ -16,7 +16,7 @@ import {
 } from "frappe-ui";
 import App from "./App.vue";
 import "./index.css";
-import { router } from "./router2";
+import { router } from "./router";
 import { socket } from "./socket";
 import { createToast } from "@/utils";
 

@@ -82,18 +82,6 @@ import { useAuthStore } from "@/stores/auth";
 import { useKeymapStore } from "@/stores/keymap";
 import { useNotificationStore } from "@/stores/notification";
 import { useSidebarStore } from "@/stores/sidebar";
-import {
-  AGENT_PORTAL_AGENT_LIST,
-  AGENT_PORTAL_CANNED_RESPONSE_LIST,
-  AGENT_PORTAL_CONTACT_LIST,
-  AGENT_PORTAL_CUSTOMER_LIST,
-  AGENT_PORTAL_DASHBOARD,
-  AGENT_PORTAL_ESCALATION_RULE_LIST,
-  AGENT_PORTAL_TEAM_LIST,
-  AGENT_PORTAL_TICKET_LIST,
-  AGENT_PORTAL_TICKET_TYPE_LIST,
-  CUSTOMER_PORTAL_LANDING,
-} from "@/router";
 import { useDevice } from "@/composables";
 import { SidebarLink } from "@/components";
 import UserMenu from "./UserMenu.vue";
@@ -124,17 +112,17 @@ const menuOptions = computed(() => [
   {
     label: "Tickets",
     icon: LucideTicket,
-    to: AGENT_PORTAL_TICKET_LIST,
+    to: "TicketsAgent",
   },
   {
     label: "Dashboard",
     icon: LucideLayoutGrid,
-    to: AGENT_PORTAL_DASHBOARD,
+    to: "DeskDashboard",
   },
   {
     label: "Agents",
     icon: LucideUser,
-    to: AGENT_PORTAL_AGENT_LIST,
+    to: "AgentList",
   },
   {
     label: "Knowledge base",
@@ -148,35 +136,35 @@ const extraOptions = [
   {
     label: "Teams",
     icon: LucideUsers,
-    to: AGENT_PORTAL_TEAM_LIST,
+    to: "Teams",
   },
   {
     label: "Escalation rules",
     icon: LucideArrowUpFromLine,
-    to: AGENT_PORTAL_ESCALATION_RULE_LIST,
+    to: "EscalationRules",
     isBeta: true,
   },
   {
     label: "Ticket types",
     icon: LucideFolderOpen,
-    to: AGENT_PORTAL_TICKET_TYPE_LIST,
+    to: "TicketTypes",
     hide: true,
   },
   {
     label: "Canned responses",
     icon: LucideCloudLightning,
-    to: AGENT_PORTAL_CANNED_RESPONSE_LIST,
+    to: "CannedResponses",
     isBeta: true,
   },
   {
     label: "Customers",
     icon: LucideUserCircle2,
-    to: AGENT_PORTAL_CUSTOMER_LIST,
+    to: "CustomerList",
   },
   {
     label: "Contacts",
     icon: LucideContact2,
-    to: AGENT_PORTAL_CONTACT_LIST,
+    to: "ContactList",
   },
 ];
 
@@ -190,7 +178,7 @@ const profileSettings = [
     label: "Customer portal",
     icon: "users",
     onClick: () => {
-      const path = router.resolve({ name: CUSTOMER_PORTAL_LANDING });
+      const path = router.resolve({ name: 'TicketsCustomer' });
       window.open(path.href, "_blank");
     },
   },

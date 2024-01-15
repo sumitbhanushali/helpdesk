@@ -4,7 +4,7 @@
       <div class="container m-auto">
         <div class="flex justify-between py-2">
           <div class="flex items-center gap-2">
-            <RouterLink :to="{ name: CUSTOMER_PORTAL_LANDING }">
+            <RouterLink :to="{ name: 'TicketsCustomer' }">
               <img :src="Logo" class="h-5" />
             </RouterLink>
             <span class="text-gray-600">/</span>
@@ -38,7 +38,6 @@
 import { onMounted, onUnmounted, ref } from "vue";
 import { Button } from "frappe-ui";
 import { Icon } from "@iconify/vue";
-import { CUSTOMER_PORTAL_LANDING } from "@/router";
 import { useKeymapStore } from "@/stores/keymap";
 import Logo from "@/assets/logos/helpdesk.svg";
 import KnowledgeBasePublicSearch from "@/components/knowledge-base";

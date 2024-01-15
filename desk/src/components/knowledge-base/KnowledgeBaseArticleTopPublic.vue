@@ -1,6 +1,6 @@
 <template>
   <div class="mb-8 flex items-center gap-1.5">
-    <RouterLink :to="{ name: KB_PUBLIC }">
+    <RouterLink :to="{ name: 'KBHome' }">
       <Icon icon="lucide:home" class="h-4 w-4 text-gray-800" />
     </RouterLink>
     <Icon icon="lucide:chevron-right" class="h-4 w-4 text-gray-600" />
@@ -20,7 +20,6 @@
 
 <script setup lang="ts">
 import { useRouter } from "vue-router";
-import { KB_PUBLIC, KB_PUBLIC_CATEGORY } from "@/router";
 import { Icon } from "@iconify/vue";
 import { toRefs } from "vue";
 
@@ -44,7 +43,7 @@ const { subCategoryId } = toRefs(props);
 
 function toSubCategory() {
   router.push({
-    name: KB_PUBLIC_CATEGORY,
+    name: 'KBCategoryPublic',
     params: {
       categoryId: subCategoryId.value,
     },

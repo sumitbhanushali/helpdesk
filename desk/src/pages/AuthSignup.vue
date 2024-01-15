@@ -51,7 +51,7 @@
           </Button>
         </form>
       </div>
-      <RouterLink :to="{ name: LOGIN }">
+      <RouterLink :to="{ name: "AuthLogin" }">
         <button class="mt-2 w-full py-2 text-base text-gray-600">
           Already have an account? Login
         </button>
@@ -63,7 +63,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { FormControl } from "frappe-ui";
-import { LOGIN } from "@/router";
 import { useAuthStore } from "@/stores/auth";
 import { useConfigStore } from "@/stores/config";
 import Logo from "~icons/logos/helpdesk";

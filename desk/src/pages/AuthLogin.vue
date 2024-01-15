@@ -51,7 +51,7 @@
           >
             Login
           </Button>
-          <RouterLink :to="{ name: SIGNUP }">
+          <RouterLink :to="{ name: "AuthSignup" }">
             <button
               v-if="!authProviders.data.length"
               class="mt-2 w-full py-2 text-base text-gray-600"
@@ -93,7 +93,6 @@
 import { ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { createResource, Button, FormControl } from "frappe-ui";
-import { SIGNUP } from "@/router";
 import { useAuthStore } from "@/stores/auth";
 import { useConfigStore } from "@/stores/config";
 import Logo from "~icons/logos/helpdesk";

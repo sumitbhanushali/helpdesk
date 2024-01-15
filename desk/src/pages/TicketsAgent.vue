@@ -27,7 +27,6 @@
 import { computed, ref } from "vue";
 import { createResource, usePageMeta, Button, Dropdown } from "frappe-ui";
 
-import { AGENT_PORTAL_TICKET } from "@/router";
 import { socket } from "@/socket";
 
 import { useAuthStore } from "@/stores/auth";
@@ -62,7 +61,7 @@ const tickets = createListManager({
         "font-medium": !d._seen?.includes(userId),
       };
       d.onClick = {
-        name: AGENT_PORTAL_TICKET,
+        name: "TicketAgent",
         params: {
           ticketId: d.name,
         },

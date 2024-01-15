@@ -41,7 +41,6 @@ import { computed, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { createListResource, Button } from "frappe-ui";
 import { Icon } from "@iconify/vue";
-import { AGENT_PORTAL_KNOWLEDGE_BASE_CATEGORY } from "@/router";
 import SidebarLink from "@/components/SidebarLink.vue";
 import KnowledgeBaseCategoryNew from "./KnowledgeBaseCategoryNew.vue";
 import { getIcon } from "./util";
@@ -61,7 +60,7 @@ const showNewDialog = ref(false);
 
 function toCategory(categoryId: string) {
   router.push({
-    name: AGENT_PORTAL_KNOWLEDGE_BASE_CATEGORY,
+    name: "DeskKBCategory",
     params: {
       categoryId,
     },

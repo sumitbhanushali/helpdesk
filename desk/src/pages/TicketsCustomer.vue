@@ -21,7 +21,7 @@
           </div>
           <RouterLink
             v-if="!configStore.preferKnowledgeBase"
-            :to="{ name: CUSTOMER_PORTAL_NEW_TICKET }"
+            :to="{ name: "TicketNew" }"
           >
             <Button
               class="bg-gray-900 text-white hover:bg-gray-800"
@@ -103,7 +103,6 @@ import { dayjs } from "@/dayjs";
 import { useConfigStore } from "@/stores/config";
 import { useTicketStatusStore } from "@/stores/ticketStatus";
 import { createListManager } from "@/composables/listManager";
-import { CUSTOMER_PORTAL_TICKET, CUSTOMER_PORTAL_NEW_TICKET } from "@/router";
 import { ListView } from "@/components";
 import PageTitle from "@/components/PageTitle.vue";
 
@@ -165,7 +164,7 @@ const tickets = createListManager({
   transform: (data) => {
     for (const d of data) {
       d.onClick = {
-        name: CUSTOMER_PORTAL_TICKET,
+        name: "TicketCustomer",
         params: {
           ticketId: d.name,
         },

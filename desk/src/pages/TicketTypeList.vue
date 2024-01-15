@@ -2,7 +2,7 @@
   <div class="flex flex-col">
     <PageTitle title="Ticket Types">
       <template #right>
-        <RouterLink :to="{ name: AGENT_PORTAL_TICKET_TYPE_NEW }">
+        <RouterLink :to="{ name: "NewTicketType" }">
           <Button label="New ticket type" theme="gray" variant="solid">
             <template #prefix>
               <LucidePlus class="h-4 w-4" />
@@ -21,10 +21,6 @@
 </template>
 <script setup lang="ts">
 import { usePageMeta } from "frappe-ui";
-import {
-  AGENT_PORTAL_TICKET_TYPE_NEW,
-  AGENT_PORTAL_TICKET_TYPE_SINGLE,
-} from "@/router";
 import { createListManager } from "@/composables/listManager";
 import PageTitle from "@/components/PageTitle.vue";
 import { ListView } from "@/components";
@@ -49,7 +45,7 @@ const ticketTypes = createListManager({
   transform: (data) => {
     for (const d of data) {
       d.onClick = {
-        name: AGENT_PORTAL_TICKET_TYPE_SINGLE,
+        name: "TicketType",
         params: {
           id: d.name,
         },

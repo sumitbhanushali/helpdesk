@@ -88,7 +88,6 @@ import {
   Dialog,
   FormControl,
 } from "frappe-ui";
-import { AGENT_PORTAL_KNOWLEDGE_BASE_ARTICLE } from "@/router";
 import { createListManager } from "@/composables/listManager";
 import { useError } from "@/composables/error";
 import { ListView } from "@/components";
@@ -139,7 +138,7 @@ const articles = createListManager({
   transform: (data) => {
     for (const d of data) {
       d.onClick = {
-        name: AGENT_PORTAL_KNOWLEDGE_BASE_ARTICLE,
+        name: 'DeskKBArticle',
         params: {
           articleId: d.name,
         },
@@ -169,7 +168,7 @@ const columns = [
 
 function toNewArticle() {
   router.push({
-    name: AGENT_PORTAL_KNOWLEDGE_BASE_ARTICLE,
+    name: 'DeskKBArticle',
     params: {
       articleId: "new",
     },

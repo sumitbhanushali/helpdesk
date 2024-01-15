@@ -29,7 +29,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { usePageMeta } from "frappe-ui";
-import { AGENT_PORTAL_CANNED_RESPONSE_SINGLE } from "@/router";
 import { createListManager } from "@/composables/listManager";
 import PageTitle from "@/components/PageTitle.vue";
 import { ListView } from "@/components";
@@ -57,7 +56,7 @@ const responses = createListManager({
   transform: (data) => {
     for (const d of data) {
       d.onClick = {
-        name: AGENT_PORTAL_CANNED_RESPONSE_SINGLE,
+        name: "CannedResponse",
         params: {
           id: d.name,
         },

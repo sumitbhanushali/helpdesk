@@ -51,7 +51,6 @@ import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { createResource, usePageMeta, Dialog, FormControl } from "frappe-ui";
 import { isEmpty } from "lodash";
-import { AGENT_PORTAL_TEAM_SINGLE } from "@/router";
 import { createListManager } from "@/composables/listManager";
 import { useError } from "@/composables/error";
 import PageTitle from "@/components/PageTitle.vue";
@@ -82,7 +81,7 @@ const teams = createListManager({
   transform: (data) => {
     for (const d of data) {
       d.onClick = {
-        name: AGENT_PORTAL_TEAM_SINGLE,
+        name: "Team",
         params: {
           teamId: d.name,
         },
@@ -108,7 +107,7 @@ const newTeam = createResource({
   auto: false,
   onSuccess() {
     router.replace({
-      name: AGENT_PORTAL_TEAM_SINGLE,
+      name: "Team",
       params: {
         teamId: newTeamTitle.value,
       },

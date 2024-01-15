@@ -2,7 +2,7 @@ import { computed, ComputedRef } from "vue";
 import { defineStore } from "pinia";
 import { createResource, call } from "frappe-ui";
 import { isEmpty } from "lodash";
-import { router, LOGIN } from "@/router";
+import { router } from "@/router";
 import { createToast } from "@/utils";
 
 const URI_LOGIN = "login";
@@ -74,7 +74,7 @@ export const useAuthStore = defineStore("auth", () => {
   });
 
   function logout() {
-    call(URI_LOGOUT).then(() => router.push({ name: LOGIN }));
+    call(URI_LOGOUT).then(() => router.push({ name: "AuthLogin" }));
   }
 
   return {

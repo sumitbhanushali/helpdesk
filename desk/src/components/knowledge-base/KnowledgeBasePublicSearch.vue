@@ -67,7 +67,6 @@ import {
 } from "@headlessui/vue";
 import { Icon } from "@iconify/vue";
 import { useRouter } from "vue-router";
-import { KB_PUBLIC_ARTICLE } from "@/router";
 
 interface P {
   modelValue: boolean;
@@ -94,7 +93,7 @@ const articles = createListResource({
   transform: (data) => {
     for (const d of data) {
       d.route = {
-        name: KB_PUBLIC_ARTICLE,
+        name: 'KBArticlePublic',
         params: {
           articleId: d.name,
         },

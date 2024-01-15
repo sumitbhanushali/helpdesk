@@ -1,7 +1,7 @@
 <template>
   <div class="container my-8">
     <div class="mb-8 flex items-center gap-2">
-      <RouterLink :to="{ name: KB_PUBLIC }">
+      <RouterLink :to="{ name: 'KBHome' }">
         <Icon icon="lucide:home" class="h-4 w-4" />
       </RouterLink>
       <Icon icon="lucide:chevron-right" class="h-4 w-4 text-gray-600" />
@@ -26,7 +26,6 @@
 import { useRouter } from "vue-router";
 import { createDocumentResource, createListResource } from "frappe-ui";
 import { Icon } from "@iconify/vue";
-import { KB_PUBLIC, KB_PUBLIC_ARTICLE } from "@/router";
 
 interface P {
   categoryId: string;
@@ -53,7 +52,7 @@ const articles = createListResource({
 
 function toArticle(articleId: string) {
   router.push({
-    name: KB_PUBLIC_ARTICLE,
+    name: 'KBArticlePublic',
     params: {
       articleId,
     },

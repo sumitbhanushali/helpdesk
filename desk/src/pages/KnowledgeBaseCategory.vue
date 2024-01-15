@@ -129,7 +129,6 @@ import {
   FormControl,
 } from "frappe-ui";
 import { isEmpty } from "lodash";
-import { AGENT_PORTAL_KNOWLEDGE_BASE_SUB_CATEGORY } from "@/router";
 import { createToast } from "@/utils";
 import { createListManager } from "@/composables/listManager";
 import { useError } from "@/composables/error";
@@ -218,7 +217,7 @@ const subCategories = createListManager({
 
 function toSubcategory(subCategoryId: string) {
   router.push({
-    name: AGENT_PORTAL_KNOWLEDGE_BASE_SUB_CATEGORY,
+    name: 'DeskKBSubcategory',
     params: {
       subCategoryId,
     },

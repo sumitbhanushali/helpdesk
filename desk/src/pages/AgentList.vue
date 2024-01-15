@@ -50,7 +50,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { usePageMeta, Avatar, Badge } from "frappe-ui";
-import { AGENT_PORTAL_TICKET_LIST } from "@/router";
 import { createListManager } from "@/composables/listManager";
 import { useFilter } from "@/composables/filter";
 import AddNewAgentsDialog from "@/components/desk/global/AddNewAgentsDialog.vue";
@@ -110,7 +109,7 @@ function toTickets(user: string) {
     value: user,
   });
   apply({
-    name: AGENT_PORTAL_TICKET_LIST,
+    name: "TicketsAgent",
   });
 }
 </script>

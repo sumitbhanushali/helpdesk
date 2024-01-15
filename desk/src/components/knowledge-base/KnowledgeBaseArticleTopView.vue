@@ -42,10 +42,6 @@
 import { useRouter } from "vue-router";
 import { Avatar } from "frappe-ui";
 import { dayjs } from "@/dayjs";
-import {
-  AGENT_PORTAL_KNOWLEDGE_BASE_CATEGORY,
-  AGENT_PORTAL_KNOWLEDGE_BASE_SUB_CATEGORY,
-} from "@/router";
 import IconChevronRight from "~icons/lucide/chevron-right";
 import IconDot from "~icons/lucide/dot";
 import IconThumbsDown from "~icons/lucide/thumbs-down";
@@ -110,7 +106,7 @@ const { categoryId, subCategoryId } = toRefs(props);
 
 function toCategory() {
   router.push({
-    name: AGENT_PORTAL_KNOWLEDGE_BASE_CATEGORY,
+    name: "DeskKBCategory",
     params: {
       categoryId: categoryId.value,
     },
@@ -119,7 +115,7 @@ function toCategory() {
 
 function toSubCategory() {
   router.push({
-    name: AGENT_PORTAL_KNOWLEDGE_BASE_SUB_CATEGORY,
+    name: "DeskKBSubcategory",
     params: {
       categoryId: categoryId.value,
       subCategoryId: subCategoryId.value,

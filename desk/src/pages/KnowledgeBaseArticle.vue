@@ -8,7 +8,7 @@
               label: article.data?.category.category_name,
               route: article.data
                 ? {
-                    name: AGENT_PORTAL_KNOWLEDGE_BASE_CATEGORY,
+                    name: 'DeskKBCategory',
                     params: {
                       categoryId: article.data?.category.name,
                     },
@@ -19,7 +19,7 @@
               label: article.data?.sub_category.category_name,
               route: article.data
                 ? {
-                    name: AGENT_PORTAL_KNOWLEDGE_BASE_SUB_CATEGORY,
+                    name: 'DeskKBSubcategory',
                     params: {
                       categoryId: article.data?.category.name,
                       subCategoryId: article.data?.sub_category.name,
@@ -74,7 +74,7 @@
         </TextEditor>
         <RouterLink
           v-if="route.meta.public"
-          :to="{ name: CUSTOMER_PORTAL_NEW_TICKET }"
+          :to="{ name: 'TicketNew' }"
         >
           <Button
             label="Still need help? Create a ticket"
@@ -99,12 +99,6 @@ import {
   Button,
   TextEditor,
 } from "frappe-ui";
-import {
-  AGENT_PORTAL_KNOWLEDGE_BASE_ARTICLE,
-  AGENT_PORTAL_KNOWLEDGE_BASE_CATEGORY,
-  AGENT_PORTAL_KNOWLEDGE_BASE_SUB_CATEGORY,
-  CUSTOMER_PORTAL_NEW_TICKET,
-} from "@/router";
 import { createToast } from "@/utils";
 import { useAuthStore } from "@/stores/auth";
 import { useError } from "@/composables/error";
@@ -214,7 +208,7 @@ const insertRes = createResource({
   onSuccess(data) {
     router
       .push({
-        name: AGENT_PORTAL_KNOWLEDGE_BASE_ARTICLE,
+        name: 'DeskKBArticle',
         params: {
           articleId: data.name,
         },
@@ -272,7 +266,7 @@ const toggleStatus = debounce(() => {
 }, 300);
 
 const backTo = computed(() => ({
-  name: AGENT_PORTAL_KNOWLEDGE_BASE_SUB_CATEGORY,
+  name: 'DeskKBSubcategory',
   params: {
     categoryId: categoryId.value,
     subCategoryId: subCategoryId.value,

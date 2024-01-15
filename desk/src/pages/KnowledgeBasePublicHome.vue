@@ -24,7 +24,6 @@
 <script setup lang="ts">
 import { useRouter } from "vue-router";
 import { createResource } from "frappe-ui";
-import { KB_PUBLIC_CATEGORY } from "@/router";
 import { getIcon } from "@/components/knowledge-base/util"; // TODO
 
 const router = useRouter();
@@ -35,7 +34,7 @@ const data = createResource({
 
 function toCategory(categoryId: string) {
   router.push({
-    name: KB_PUBLIC_CATEGORY,
+    name: 'KBCategoryPublic',
     params: {
       categoryId,
     },
