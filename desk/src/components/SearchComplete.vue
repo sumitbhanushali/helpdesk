@@ -3,8 +3,8 @@
     placeholder="Select an option"
     :options="options"
     :value="selection"
-    @update:query="(q) => onUpdateQuery(q)"
-    @change="(v) => (selection = v)"
+    @update:query="(q: string) => onUpdateQuery(q)"
+    @change="(val: object) => (selection = val)"
   />
 </template>
 
@@ -44,7 +44,7 @@ const props = defineProps({
   },
 });
 
-const r = createListResource({
+const resource = createListResource({
   doctype: props.doctype,
   pageLength: props.pageLength,
   auto: true,
@@ -54,13 +54,13 @@ const r = createListResource({
   },
   onSuccess: () => {
     selection.value = props.value
-      ? options.value.find((o) => o.value === props.value)
+      ? options.value.find((option) => option.value === props.value)
       : null;
   },
 });
 const options = computed(
   () =>
-    r.data?.map((result) => ({
+  resource.data?.map((result) => ({
       label: result[props.labelField],
       value: result[props.valueField],
     })) || []
@@ -68,12 +68,12 @@ const options = computed(
 const selection = ref(null);
 
 function onUpdateQuery(query: string) {
-  r.update({
+  resource.update({
     filters: {
       [props.searchField]: ["like", `%${query}%`],
     },
   });
 
-  r.reload();
+  resource.reload();
 }
 </script>

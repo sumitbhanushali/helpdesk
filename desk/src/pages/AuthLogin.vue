@@ -51,7 +51,7 @@
           >
             Login
           </Button>
-          <RouterLink :to="{ name: "AuthSignup" }">
+          <RouterLink :to="{ name: 'AuthSignup' }">
             <button
               v-if="!authProviders.data.length"
               class="mt-2 w-full py-2 text-base text-gray-600"

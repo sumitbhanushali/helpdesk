@@ -2,7 +2,6 @@ import { watchEffect } from "vue";
 import { useRoute, useRouter, RouteLocationNamedRaw } from "vue-router";
 import { useStorage } from "@vueuse/core";
 import { createResource } from "frappe-ui";
-import { orderBy } from "lodash";
 import { DocField, Filter, Resource } from "@/types";
 import { useAuthStore } from "@/stores/auth";
 
@@ -40,15 +39,24 @@ export function useFilter(doctype: string) {
       append_assign: true,
     },
     transform: (data) => {
-      data = orderBy(
-        data.map((f) => ({
-          label: f.label,
-          value: f.fieldname,
-          ...f,
-        })),
-        "label"
-      );
-      return data;
+      return data.sort((fieldA, fieldB) => {
+        const labelA = fieldA.label.toUpperCase();
+        const labelB = fieldB.label.toUpperCase();
+        if (labelA < labelB) {
+          return -1;
+        }
+        if (labelA > labelB) {
+          return 1;
+        }
+
+        return 0;
+      }).map((field) => {
+        return {
+          label: field.label,
+          value: field.fieldname,
+          ...field,
+        }
+      })
     },
   });
 
@@ -60,7 +68,7 @@ export function useFilter(doctype: string) {
     }
   });
 
-  function fromUrl(query: string, fields: DocField[]) {
+  function fromUrl(query: string, fields: DocField[]): Filter[] {
     return query
       .split(" ")
       .map((f) => {
@@ -73,6 +81,7 @@ export function useFilter(doctype: string) {
           fieldname,
           operator,
           value,
+          label: ""
         };
       })
       .filter((f) => !fields || (fields && f.field))
