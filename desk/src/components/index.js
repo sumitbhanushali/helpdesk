@@ -17,3 +17,6 @@ export { default as UniInput } from "./UniInput.vue";
 export { default as UserAvatar } from "./UserAvatar.vue";
 export { default as SortBy } from "./SortBy.vue";
 export { default as ViewControls } from "./ViewControls.vue";
+export { default as ViewControls2 } from "./ViewControls2.vue";
+export { default as Filter2 } from "./Filter2.vue";
+

@@ -1,4 +1,5 @@
 export { default as TicketsAgentList } from "./TicketsAgentList.vue";
+export { default as TicketsAgentList2 } from "./TicketsAgentList2.vue";
 export { default as PresetFilters } from "./PresetFilters.vue";
 export { default as TicketAgentActions } from "./TicketAgentActions.vue";
 export { default as TicketAgentSidebar } from "./TicketAgentSidebar.vue";

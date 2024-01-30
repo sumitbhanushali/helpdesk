@@ -110,7 +110,7 @@ const routes = [
       {
         path: "/tickets",
         name: "TicketsAgent",
-        component: () => import("@/pages/TicketsAgent.vue"),
+        component: () => import("@/pages/TicketsAgent2.vue"),
       },
       {
         path: "/tickets/:ticketId",
