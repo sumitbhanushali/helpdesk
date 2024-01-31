@@ -206,7 +206,7 @@ const routes = [
         path: "escalation-rules",
         name: "EscalationRules",
         component: () =>
-          import("@/pages/desk/escalation/EscalationRuleList.vue"),
+          import("@/pages/EscalationRuleList.vue"),
       },
     ],
   },

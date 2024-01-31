@@ -21,7 +21,7 @@
           </div>
           <RouterLink
             v-if="!configStore.preferKnowledgeBase"
-            :to="{ name: "TicketNew" }"
+            :to="{ name: 'TicketNew' }"
           >
             <Button
               class="bg-gray-900 text-white hover:bg-gray-800"
