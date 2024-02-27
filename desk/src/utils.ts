@@ -1,5 +1,6 @@
 import { useClipboard } from "@vueuse/core";
 import { toast } from "frappe-ui";
+import zod from "zod";
 
 /**
  * Wrapper to create toasts, supplied with default options.
@@ -38,4 +39,9 @@ export function getAssign(s: string): string | undefined {
   const assignJson = JSON.parse(s);
   const arr = Array.isArray(assignJson) ? assignJson : [];
   return arr.slice(-1).pop();
+}
+
+export function validateEmail(input) {
+  const success = zod.string().email().safeParse(input.value).success;
+  if (!success) return "Invalid email";
 }
