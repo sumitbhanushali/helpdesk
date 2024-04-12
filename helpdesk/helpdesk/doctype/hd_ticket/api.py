@@ -8,16 +8,6 @@ from helpdesk.consts import DEFAULT_TICKET_TEMPLATE
 from helpdesk.helpdesk.doctype.hd_ticket_template.api import get_one as get_template
 from helpdesk.utils import check_permissions, get_customer, is_agent
 
-
-@frappe.whitelist()
-def new(doc, attachments=[]):
-	doc["doctype"] = "HD Ticket"
-	doc["via_customer_portal"] = bool(frappe.session.user)
-	d = frappe.get_doc(doc).insert()
-	d.create_communication_via_contact(d.description, attachments)
-	return d
-
-
 @frappe.whitelist()
 def get_one(name):
 	check_permissions("HD Ticket", None)

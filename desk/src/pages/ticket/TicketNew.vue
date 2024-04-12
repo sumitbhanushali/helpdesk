@@ -87,16 +87,17 @@ const visibleFields = computed(() =>
   )
 );
 const ticket = createResource({
-  url: "helpdesk.helpdesk.doctype.hd_ticket.api.new",
+  url: "frappe.client.insert",
   debounce: 300,
   makeParams: () => ({
     doc: {
+      doctype: "HD Ticket",
       description: description.value,
       subject: subject.value,
       template: props.templateId,
+      attachments: attachments.value,
       ...templateFields,
     },
-    attachments: attachments.value,
   }),
   validate: (params) => {
     const fields = visibleFields.value?.filter((f) => f.required) || [];

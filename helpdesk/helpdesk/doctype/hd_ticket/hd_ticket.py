@@ -180,9 +180,14 @@ class HDTicket(Document):
 		self.validate_ticket_type()
 
 	def before_save(self):
+		self.via_customer_portal = bool(frappe.session.user)
 		self.apply_sla()
 
 	def after_insert(self):
+		if not hasattr(self, "attachments"):
+			self.attachments = []
+
+		self.create_communication_via_contact(self.description, self.attachments)
 		log_ticket_activity(self.name, "created this ticket")
 		capture_event("ticket_created")
 		publish_event("helpdesk:new-ticket", {"name": self.name})
