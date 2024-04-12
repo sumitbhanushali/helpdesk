@@ -147,7 +147,8 @@
    "in_global_search": 1,
    "label": "Description",
    "oldfieldname": "problem_description",
-   "oldfieldtype": "Text"
+   "oldfieldtype": "Text",
+   "reqd": 1
   },
   {
    "fieldname": "template",
@@ -410,7 +411,7 @@
  "icon": "fa fa-issue",
  "idx": 61,
  "links": [],
- "modified": "2023-11-23 13:44:59.105648",
+ "modified": "2024-04-12 15:18:26.895621",
  "modified_by": "Administrator",
  "module": "Helpdesk",
  "name": "HD Ticket",
