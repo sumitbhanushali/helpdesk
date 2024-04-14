@@ -58,7 +58,16 @@ class TestHDTicket(FrappeTestCase):
 		self.assertEqual(ticket.ticket_type, "Incident", 
 				   msg="default Ticket Type should be set from Default Type in HD Settings")
 		
-	def test_ticket_default_sla(self):
+	def test_ticket_default_sla_track_sla(self):
 		ticket = frappe.get_doc(get_ticket_obj()).insert()
 		self.assertEqual(ticket.sla, "Default", 
-				   msg="Ticket SLA should be set to SLA with Default SLA checked")
+				   msg="Ticket SLA should be set to SLA with Default SLA and Track SLA checked")
+		
+	def test_ticket_default_sla_without_track_sla(self):
+		hd_settings = frappe.get_doc("HD Settings")
+		hd_settings.track_service_level_agreement = 0
+		hd_settings.save()
+
+		ticket = frappe.get_doc(get_ticket_obj()).insert()
+		self.assertEqual(ticket.sla, None, 
+				   msg="Ticket SLA should not be set to SLA when Track SLA unchecked")
