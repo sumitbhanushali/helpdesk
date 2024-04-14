@@ -173,7 +173,10 @@ class HDTicket(Document):
 		self.set_first_responded_on()
 		self.set_feedback_values()
 		self.apply_escalation_rule()
-		self.set_sla()
+
+		if frappe.get_doc("HD Settings").track_service_level_agreement:
+			self.set_sla()
+			self.apply_sla()
 
 	def validate(self):
 		self.validate_feedback()
@@ -181,7 +184,6 @@ class HDTicket(Document):
 
 	def before_save(self):
 		self.via_customer_portal = bool(frappe.session.user)
-		self.apply_sla()
 
 	def after_insert(self):
 		if not hasattr(self, "attachments"):
@@ -194,7 +196,7 @@ class HDTicket(Document):
 
 	def on_update(self):
 		if self.status == "Open":
-			if self.get_doc_before_save() and self.get_doc_before_save().status != "Open":
+			if self._assign and self.get_doc_before_save() and self.get_doc_before_save().status != "Open":
 				
 				agent = json.loads(self._assign)
 				if len(agent) > 0:
