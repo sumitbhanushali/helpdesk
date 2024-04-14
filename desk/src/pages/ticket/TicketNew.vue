@@ -21,7 +21,9 @@
         placeholder="A short description"
       />
     </div>
-    <TicketNewArticles :search="subject" class="mx-5 mb-5" />
+    <div v-if="settings.data?.suggest_articles_in_new_ticket_page">
+      <TicketNewArticles :search="subject" class="mx-5 mb-5" />
+    </div>
     <span class="mx-5 mb-5">
       <TicketTextEditor
         ref="editor"
@@ -77,6 +79,14 @@ const template = createResource({
   url: "helpdesk.helpdesk.doctype.hd_ticket_template.api.get_one",
   makeParams: () => ({
     name: props.templateId || "Default",
+  }),
+  auto: true,
+});
+
+const settings = createResource({
+  url: "frappe.client.get",
+  makeParams: () => ({
+    doctype: "HD Settings",
   }),
   auto: true,
 });
