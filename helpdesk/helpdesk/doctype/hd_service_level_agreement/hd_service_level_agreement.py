@@ -27,8 +27,19 @@ class HDServiceLevelAgreement(Document):
 
 	def validate_priorities(self):
 		priorities = []
+		default_priority = None
 
 		for priority in self.priorities:
+			if default_priority and priority.default_priority:
+				frappe.throw(
+					_("Only one priority can be default. Priority {0} is already set as default.").format(
+						default_priority
+					)
+				)
+
+			if priority.default_priority:
+				default_priority = priority.priority
+
 			# Check if response and resolution time is set for every priority
 			if not priority.response_time:
 				frappe.throw(
@@ -103,7 +114,7 @@ class HDServiceLevelAgreement(Document):
 				_("The Condition '{0}' is invalid: {1}").format(self.condition, str(e))
 			)
 
-	# What?
+	# What?, TODO not getting used? delete?
 	def get_hd_service_level_agreement_priority(self, priority):
 		priority = frappe.get_doc(
 			"HD Service Level Priority", {"priority": priority, "parent": self.name}

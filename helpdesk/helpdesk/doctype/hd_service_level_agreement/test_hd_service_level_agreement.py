@@ -24,7 +24,6 @@ def get_create_obj():
             "resolution_time": 28800
         },
         {
-            "docstatus": 0,
             "doctype": "HD Service Level Priority",
             "default_priority": 0,
             "parentfield": "priorities",
@@ -44,7 +43,6 @@ def get_create_obj():
     ],
     "pause_sla_on": [
         {
-            "docstatus": 0,
             "doctype": "HD Pause Service Level Agreement On Status",
             "status": "Replied",
             "parentfield": "pause_sla_on",
@@ -78,5 +76,10 @@ class TestHDServiceLevelAgreement(FrappeTestCase):
 		sla = frappe.get_doc(get_create_obj()).insert()
 		self.assertTrue(sla.name)
 
-# default sla..test start and end time
-# not default sla..test condition
+	def test_validate_priority(self):
+		obj = get_create_obj()
+		obj["priorities"][0]["default_priority"] = 1
+		obj["priorities"][1]["default_priority"] = 1
+		doc = frappe.get_doc(obj)
+		with self.assertRaises(frappe.ValidationError, msg="There can be only one priority as default"):
+			doc.insert()
