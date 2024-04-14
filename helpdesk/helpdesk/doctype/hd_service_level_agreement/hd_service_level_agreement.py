@@ -27,20 +27,18 @@ class HDServiceLevelAgreement(Document):
 
 	def validate_priorities(self):
 		priorities = []
-		default_priority = None
 
 		for priority in self.priorities:
-			if default_priority and priority.default_priority:
+			if self.default_priority and priority.default_priority:
 				frappe.throw(
 					_("Only one priority can be default. Priority {0} is already set as default.").format(
-						default_priority
+						self.default_priority
 					)
 				)
 
 			if priority.default_priority:
-				default_priority = priority.priority
+				self.default_priority = priority.priority
 
-			# Check if response and resolution time is set for every priority
 			if not priority.response_time:
 				frappe.throw(
 					_("Set Response Time for Priority {0} in row {1}.").format(
@@ -68,18 +66,12 @@ class HDServiceLevelAgreement(Document):
 
 			priorities.append(priority.priority)
 
-		# Check if repeated priority
 		if not len(set(priorities)) == len(priorities):
 			repeated_priority = get_repeated(priorities)
 			frappe.throw(_("Priority {0} has been repeated.").format(repeated_priority))
-
-		# set default priority from priorities
-		try:
-			self.default_priority = next(
-				d.priority for d in self.priorities if d.default_priority
-			)
-		except Exception:
-			frappe.throw(_("Select a Default Priority."))
+		
+		if not self.default_priority:
+			frappe.throw(_("Set a default priority."))
 
 	def validate_support_and_resolution(self):
 		week = get_weekdays()

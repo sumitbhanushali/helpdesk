@@ -78,8 +78,44 @@ class TestHDServiceLevelAgreement(FrappeTestCase):
 
 	def test_validate_priority(self):
 		obj = get_create_obj()
+		obj["priorities"] = None
+		doc = frappe.get_doc(obj)
+		with self.assertRaises(frappe.ValidationError, msg="Priorities are mandatory"):
+			doc.insert()
+
+		obj = get_create_obj()
+		obj["priorities"][0]["default_priority"] = 0
+		doc = frappe.get_doc(obj)
+		with self.assertRaises(frappe.ValidationError, msg="There should be atleast one default priority"):
+			doc.insert()
+
+		obj = get_create_obj()
+		obj["priorities"][1] = obj["priorities"][0]
+		doc = frappe.get_doc(obj)
+		with self.assertRaises(frappe.ValidationError, msg="There cannot be duplicate priorities"):
+			doc.insert()
+
+		obj = get_create_obj()
 		obj["priorities"][0]["default_priority"] = 1
 		obj["priorities"][1]["default_priority"] = 1
 		doc = frappe.get_doc(obj)
 		with self.assertRaises(frappe.ValidationError, msg="There can be only one priority as default"):
+			doc.insert()
+
+		obj = get_create_obj()
+		obj["priorities"][0]["response_time"] = None
+		doc = frappe.get_doc(obj)
+		with self.assertRaises(frappe.ValidationError, msg="Response time is mandatory"):
+			doc.insert()
+
+		obj = get_create_obj()
+		obj["priorities"][0]["resolution_time"] = None
+		doc = frappe.get_doc(obj)
+		with self.assertRaises(frappe.ValidationError, msg="Resolution time is mandatory when apply_sla_for_resolution is enabled"):
+			doc.insert()
+
+		obj = get_create_obj()
+		obj["priorities"][0]["resolution_time"] = obj["priorities"][0]["response_time"] - 1
+		doc = frappe.get_doc(obj)
+		with self.assertRaises(frappe.ValidationError, msg="Resolution time cannot be less than response time"):
 			doc.insert()
